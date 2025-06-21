@@ -7,8 +7,11 @@ function TodoList(props) {
       <ul>
         {props.error && props.onError()}
         {props.loading && props.onLoading()}
-        {!props.loading && !props.searchedTodos.length && props.onEmptyTodos()}
-        {props.searchedTodos.map((todo) => props.render(todo))}
+        {!props.loading && !props.totalTodos && props.onEmptyTodos()}
+        {!!props.totalTodos &&
+          !props.searchedTodos.length &&
+          props.onEmptySearchedTodos(props.searchText)}
+        {props.searchedTodos.map(props.render || props.children)}
       </ul>
     </section>
   );
